@@ -66,6 +66,18 @@ ADD resources/nginx.conf /etc/nginx/
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+#------------- Composer install / update ----------------------------------------------------
+
+# Copy Source Code
+#COPY backend/ /var/www/html
+RUN git clone https://github.com/hendrikusR/thefthing-backend /var/www/html
+
+# Prepare .env
+RUN cp .env.example .env
+
+# Composer Install
+RUN cd /var/www/html && composer install
+
 #------------- Supervisor Process Manager ----------------------------------------------------
 
 # Install supervisor
