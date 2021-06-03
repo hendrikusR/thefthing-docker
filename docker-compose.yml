@@ -1,15 +1,13 @@
 version: '3.7'
 
 services:
-  mysql:  
+  mysql_thefthing:  
     image: mysql:5.7
-    container_name: mysql
-    hostname: mysql
+    container_name: mysql_thefthing
+    hostname: mysql_thefthing
     environment:
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
-      - MYSQL_DATABASE=appdb
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD_FILE=/run/secrets/db_password
+      - MYSQL_DATABASE=thefthing
     restart: unless-stopped
     ports:
       - 33066:3306
@@ -17,7 +15,6 @@ services:
       - mysql-data:/var/lib/mysql
     secrets:
       - db_root_password
-      - db_password
 
   backend:
     build:
@@ -29,7 +26,7 @@ services:
     ports:
       - "5000:80"
     depends_on:
-      - mysql
+      - mysql_thefthing
 
   frontend:
     build:
@@ -46,8 +43,6 @@ services:
 secrets:
   db_root_password:
     file: db_root_password.txt
-  db_password:
-    file: db_password.txt
 
 volumes:
   mysql-data:
