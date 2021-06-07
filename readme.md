@@ -7,3 +7,7 @@
 - import sql thefthing melalui terminal dengan perintah mysql -u root -h 127.0.0.1 -P 33066 -p thefthing < (your file mysql )
 - akses api di port 5000, http://localhost:5000
 - akses frontend dengan url http://localhost
+
+
+
+# File SQL Sudah di sertakan di repository ini.
